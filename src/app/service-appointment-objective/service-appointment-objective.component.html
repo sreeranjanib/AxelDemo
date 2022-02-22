@@ -1,0 +1,136 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row">
+        <!-- <nav id="sidebarMenu" class="col-md-3 col-lg-2 px-0 d-md-block sidebar collapse">
+            <div class="position-sticky pt-4">
+             
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                    <img src="../../assets/images/tag_Icon.png" style="margin-top: -5px;" class="feather">Sales </a>
+                    <ul class="child">
+                        <li (click)="SideTabClick(1.1)"><a>Overview</a></li>
+                        <li><a>Trends</a></li>
+                        <li><a>Reports</a></li>
+                        <li><a>Data Query</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                    <img src="../../assets/images/inv_icon.png" style="margin-top: -5px;" class="feather">Inventory </a>
+                    <ul class="child">
+                        <li (click)="SideTabClick(2.1)"><a>Overview</a></li>
+                        <li><a>Trends</a></li>
+                        <li><a>Reports</a></li>
+                        <li (click)="SideTabClick(2.4)" ><a>Data Query</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                    <img src="../../assets/images/finance_icon.png" style="margin-top: -5px;" class="feather">Finance </a>
+                    <ul class="child">
+                        <li><a>Overview</a></li>
+                        <li><a>Trends</a></li>
+                        <li><a>Reports</a></li>
+                        <li ><a>Data Query</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                    <img src="../../assets/images/service_icon.png" style="margin-top: -5px;" class="feather">Service & Parts </a>
+                    <ul class="child">
+                        <li (click)="SideTabClick(4.1)" ><a>Overview</a></li>
+                        <li><a>Trends</a></li>
+                        <li><a>Reports</a></li>
+                        <li ><a>Data Query</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                    <img src="../../assets/images/tag_Icon.png" style="margin-top: -5px;" class="feather">Service Appointments </a>
+                    <ul class="child">
+                      <li (click)="SideTabClick(5.3)"><a>SAG Report</a></li>
+                        <li (click)="SideTabClick(5.1)"><a>Maloney Report</a></li>
+                        <li class="active" ><a>Objective</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                    <img src="../../assets/images/tag_Icon.png" style="margin-top: -5px;" class="feather">Admin</a>
+                    <ul class="child">
+                      <li  (click)="SideTabClick(6.1)"><a>Accounts COA</a></li>
+                    </ul>
+                  </li>
+                </ul>
+        
+              </div>
+          </nav> -->
+          <ng4-loading-spinner  ></ng4-loading-spinner>
+          <main class="col-md-9 ms-auto col-lg-10">
+              <div class="row flex-wrap flex-md-nowrap align-items-center border-bottom">
+                  <div class="top_bg d-flex align-items-center">
+                  </div>
+              </div>
+              <div class="stor_headng">
+                <div class="row">
+                  <div class="column1">
+                  </div>
+                  <div class="column">
+                    <h2 class="ttl-sales"><span>Objectives</span></h2>
+                  </div>
+                </div>
+            </div>
+            
+            <div   class="table-responsive hover_">
+              <table class="table table-striped" style="width: 100%; text-align: center;">
+                <colgroup>
+                <col>
+                <col style="background:#f1f1f1">
+                <col>
+                <col style="background:#f1f1f1">
+                <col>
+                <col style="background:#f1f1f1">
+                <col>
+                <col style="background:#f1f1f1">
+                <col>
+                <col style="background:#f1f1f1">
+                <col>
+                <col style="background:#f1f1f1">
+                <col>
+                <col style="background:#f1f1f1">
+                </colgroup>
+                <thead >
+                    <tr >
+                        <th style="width: 35%; border-top: none;" class="store_name"></th> 
+                        <th style="width: 25%; border-bottom: 5px solid #65bbfa;"><span class="store_ttl">M-F Objective</span><span class="store_val">
+                          </span></th>
+                        <th style="width: .3%; background:transparent !important;"></th>
+<th style="width: 25%; border-bottom: 5px solid #65bbfa;"><span class="store_ttl">Sat Objective</span> <br> <span class="store_val"></span></th>
+                        <th style="width: .3%; background:transparent !important;"></th>
+                        <th style="width: 20%; border-bottom: 5px solid #65bbfa;"><span class="store_ttl">Action</span> <br> <span class="store_val"></span></th>
+                        <!-- <th style="width: .3%; background:transparent !important;"></th> -->
+    
+                        
+                      </tr>
+                </thead>
+                
+                <tbody [formGroup]="AddObj"  *ngIf="Service_App_Grid" style="cursor: pointer;">
+                 
+                  <tr   *ngFor="let item of Service_App_Grid ">
+                    <td class="store_name">{{item.STORE}}</td>
+                    <input #inputTarget [value]="item.MF_Objective"  formControlName="MF_Obj" type="text" class="form-control" >
+                    <td style="background: transparent !important;"></td>
+                    <input #inputTarget [value]="item.Sat_Objective"  formControlName="Sat_Obj" type="text" class="form-control" >
+                    <td style="background: transparent !important;"></td>
+                    <button (click)="SaveObective(item.id)" type="submit" style="width: 80%;background-color:#444bd4;" class="btn btn-primary">Update</button>
+                    
+                  </tr>
+                </tbody>
+                
+              </table>
+            </div>
+          </main>
+    </div>
+</div>
+
+

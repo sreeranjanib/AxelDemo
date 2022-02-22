@@ -1,0 +1,159 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row">
+        
+          <ng4-loading-spinner  ></ng4-loading-spinner>
+          <main class="col-md-9 ms-auto col-lg-10">
+              <div class="row flex-wrap flex-md-nowrap align-items-center border-bottom">
+                  <div class="top_bg d-flex align-items-center">
+                  </div>
+              </div>
+              <div class="stor_headng">
+                <div class="row">
+                  <div class="column1">
+                  </div>
+                  <div class="column">
+                    <h2 class="ttl-sales"><span>Report Accessing</span></h2>
+                  </div>
+                </div>
+            </div>
+           
+          </main>
+        <main class="col-md-9 ms-auto col-lg-10" >
+            
+          <div class="contentpanel">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-md-offset-4">
+                  <div class="panel panel-default">
+
+                    <div class="panel-body">
+                      <form >
+                        <div class="row">
+                          <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="Mod_Headings" for="Id" >Users:</label>
+                                <select (change)="selected('Username', $event.target.value)" class="form-control w-50 inptcs" >
+                                  <option value="0" [disabled]="true">Select Role</option>
+                                  <option *ngFor="let i of UserDropDown" [value]="i.id">{{i.User_Displayname}}
+                                  </option>
+                                </select>
+                            </div>
+                        <br>
+                        <div>
+                          
+                        </div>
+                            <!-- <div (change)="selected('ModuleName', $event.target.value)"  *ngFor="let i of SubModulesData" class="form-check">
+                                <input class="form-check-input" [value]="i.SMOD_FILENAME" type="radio" name="flexRadioDefault" id="Submodule">
+                                <label style="font-size: 15px;width:1025px" class="form-check-label " for="Submodule" >
+                                    {{i.SMOD_FILENAME}}
+                                </label>
+                            </div> -->
+                            <!-- <kendo-treeview style="font-size: 14px;"
+                                  [nodes]="data"
+                                  textField="text"
+                                  kendoTreeViewHierarchyBinding
+                                  childrenField="items"
+                                  kendoTreeViewExpandable
+                                  [expandedKeys]="expandedKeys"
+                                  kendoTreeViewCheckable
+                                  [(checkedKeys)]="checkedKeys" >
+                                </kendo-treeview>
+                                <hr /> -->
+                                <!-- <div class="categories">
+                                  <ng-container *ngFor="let cat of categoryList; let i = index">
+                                    <div>
+                                      <input
+                                        [checked]="cat.selected"
+                                        type="checkbox"
+                                        [value]="cat.id"/>
+                                      {{ cat.name }}
+                                      <ng-container *ngFor="let sub of cat.sub_categories; let k = index">
+                                      
+                                        <div *ngIf="cat.sub_categories" style="margin-left: 25px">
+                                          <input
+                                            
+                                            (change)="categoryChange($event, cat.id, sub.id)"
+                                            type="checkbox"
+                                            [value]="sub.id"/>
+                                        {{ sub.name }}
+                                        </div>
+                                      </ng-container>
+                                    </div>
+                                  </ng-container>
+                                </div> -->
+                                <div *ngFor="let item of categoryList">
+                                <div class="categories">
+
+                                  <input type="checkbox" id={{item.ARC_ID}} (change)="checkModule(item,$event)" [checked]="item.isChecked=='Y'" style="vertical-align: middle;position: relative;bottom: 1px;">&nbsp;
+
+                                  <label for={{item.ARC_ID}} style="font-family: HelveticaNeue-Regular;font-size: 14px;">{{item.ARC_REPORT_NAME}}</label>
+                                </div>
+                                <div style="margin-left: 25px;" *ngFor="let subitem of subCategoryList">
+
+                                  <div *ngIf="subitem.ARC_SUBMOD_ID == item.ARC_SUBMOD_ID">
+
+                                  <input type="checkbox" id={{subitem.ARC_ID}}  (change)="checkChild(subitem,item,$event)" [checked]="subitem.isChecked=='Y'" style="vertical-align: middle;position: relative;bottom: 1px;">&nbsp;
+                                  
+                                  <label for={{subitem.ARC_ID}} style="font-family: HelveticaNeue-Regular;font-size: 14px;">{{subitem.ARC_REPORT_NAME}}</label>
+                                  
+                                </div>
+                              </div>
+                              </div>
+                                <div  class="date">
+                                  <label class="Mod_Headings" >Report Date:</label>
+                                  <div class="md-form">
+                                      <input type="date" [(ngModel)]="ReportDate"  (dateChange)="Date('ReportDate')"  name="startDate" class="datepicker">
+                                  </div>
+                                </div>
+
+                                <div  class="date">
+                                  <label class="Mod_Headings" >Expiry Date:</label>
+                                  <div class="md-form">
+                                      <input type="date" [(ngModel)]="ExpiryDate"   (dateChange)="Date('ExpiryDate')"  name="endDate" class="datepicker">
+                                  </div>
+                                </div>
+                                <br>
+                                <div class="categories">
+                                  <input type="checkbox" (change)="checkPdfStatus($event)" [checked]="pdfStatus=='Y'" style="vertical-align: middle;position: relative;bottom: 2px;">&nbsp;
+                                  <label style="font-family: HelveticaNeue-Regular;font-size: 14px;">Send PDF</label>
+
+                                </div>
+                                <!-- <div style="margin: 10px 0">
+                                  <div class="example-config">
+                                    Checked keys: {{ checkedKeys.join(",") }}
+                                  </div>
+                                </div> -->
+                        </div>
+                    </div>
+
+                    <!-- <input type="file" (change)="upload($event.target.files)" />
+                    Upload Percent: {{percentDone}}% <br />
+                    
+                    <ng-container *ngIf="uploadSuccess">
+                      Upload Successful
+                    </ng-container>  -->
+                     
+                        <div class="col-lg-12 pt-lg-5 pl-lg-4">
+                          <div class="row">
+                            <div class="col-lg-2">
+                              <button type="button" class="savebutton" (click)="SaveReport()">Save</button>
+                            </div>
+                            <!-- <div class="col-lg-2">
+                              <button type="button" class="cancelbutton" >Cancel</button>
+                            </div> -->
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+        </main>
+    </div>
+</div>
+
+

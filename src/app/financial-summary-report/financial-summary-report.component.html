@@ -1,0 +1,942 @@
+
+<app-header></app-header>
+<ng4-loading-spinner ></ng4-loading-spinner>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 p-0">
+             <div class = "Nrep2_bg"> 
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div *ngIf="globalVarComponent.ReportId == 0">
+                            <a (click)="PreviousUrl()" style="cursor: pointer;font-size: medium;font-weight: bold;" class="link-light">Back</a>
+                          </div>
+                    </div>
+                    <div class="col-lg-10 ">
+                        <div class="row">
+                            <div class="data NR_dropdwn">
+                                <select id="Dealer_DDL" (change)="DealerChange($event)" >
+                                     <option  value="0">ALL STORES</option>
+                                    <option *ngFor="let i of GetStores" [value]="i.AS_ID">{{i.DEALER_NAME}}</option> 
+                                </select>
+                            </div>
+                            <div class="date">
+                                <div class="md-form">
+                                    <input type="date" [ngModel]="ChangeDate | date:'yyyy-MM-dd'" (ngModelChange)="updatedate($event)"  name="startDate" class="datepicker">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 p-0">
+                        <div class="stor_headng">
+                            <div class="row">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-10">
+                              <div class="column1  col-lg-5">
+                                <h2 class="ttl-sales"><span>Current Period</span></h2>
+                              </div>
+                              <div class="column2 col-lg-2" >
+                                <h2 class="ttl-sales"><span>PriorMonth</span></h2>
+                              </div>
+                              <div class="column3 col-lg-3">
+                                <h2 class="ttl-sales"><span>Prior Year</span></h2>
+                              </div>
+                            </div>
+                        </div>
+                        </div>
+                      <div class="Nrep2">
+                        <div class="nr_curve"> 
+                        <table>
+                              <thead>
+                                <tr>
+                                  <th></th>
+                                  <th ></th>
+                                  <th class="_ttl">mtd</th>
+                                  <th ></th>
+                                  <th class="_ttl">budget</th>
+                                  <th ></th>
+                                  <th class="_ttl">variance </th>
+                                  <th ></th>
+                                  <th class="_ttl">ytd</th>
+                                  <th ></th>
+                                  <th class="_ttl">BUDGET</th>
+                                  <th ></th>
+                                  <th class="_ttl">Variance</th>
+                                  <th ></th>
+                                  <th class="_ttl">MTD</th>
+                                  <th ></th>
+                                  <th class="_ttl">variance</th>
+                                  <th></th>
+                                  <th class="_ttl">mtd</th>
+                                  <th></th>
+                                  <th class="_ttl">variance</th>
+                                  <th></th>
+                                  <th class="_ttl">ytd</th>
+                                  <th></th>
+                                  <th class="_ttl">variance</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <ng-container>
+                                    <tr>
+                                        <td class="even" style="text-transform: uppercase; color: #f89d1c;  font-family: 'Gotham\ Bold';;">Variable Operations</td>
+                                        <td class="even" style="background: transparent !important;"></td>   
+                                        <td class="even"></td>
+                                        <td class="even" style="background: transparent !important;"></td>
+                                        <td class="even"></td>
+                                        <td class="even" style="background: transparent !important;"></td>
+                                        <td class="even"></td>
+                                        <td class="even" style="background: transparent !important;"></td>
+                                        <td class="even"></td>
+                                        <td class="even" style="background: transparent !important;"></td>
+                                        <td class="even"></td>
+                                        <td class="even" style="background: transparent !important;"></td>
+                                        <td class="even"></td>
+                                        <td class="even" style="background: transparent !important;"></td>
+                                        <td class="even"></td>
+                                        <td class="even" style="background: transparent !important;"></td>
+                                        <td class="even"></td>
+                                        <td class="even" style="background: transparent !important;"></td>
+                                        <td class="even"></td>
+                                        <td class="even" style="background: transparent !important;"></td>
+                                        <td class="even"></td>
+                                        <td class="even" style="background: transparent !important;"></td>
+                                        <td class="even"></td>
+                                        <td class="even" style="background: transparent !important;"></td>
+                                        <td class="even"></td>
+                                      </tr>
+
+                                 <tr *ngFor="let item of New_Units"> 
+                                  <td>New Units</td>
+                                  <td class="odd" style="background: transparent !important;"></td>
+                                  <td class="odd">{{item.MTD}}</td>
+                                  <td class="odd" style="background: transparent !important;"></td>
+                                  <td class="odd">{{item.BUDGET}}</td>
+                                  <td class="odd" style="background: transparent !important;"></td>
+                                  <td class="odd">{{item.VARIANCE }}</td>
+                                  <td class="odd" style="background: transparent !important;"></td>
+                                  <td class="odd">{{item.YTD }}</td>
+                                  <td class="odd" style="background: transparent !important;"></td>
+                                  <td class="odd" >{{item.CY_BUDGET}}</td>
+                                  <td class="odd" style="background: transparent !important;"></td>
+                                  <td class="odd">{{item.CY_VARIANCE}}</td>
+                                  <td class="odd" style="background: transparent !important;"></td>
+                                  <td class="odd">{{item.LM_MTD}}</td>
+                                  <td class="odd" style="background: transparent !important;"></td>
+                                  <td class="odd">{{item.LM_VARIANCE }}</td>
+                                  <td class="odd" style="background: transparent !important;"></td>
+                                  <td class="odd" >{{item.LMY_MTD}}</td>
+                                  <td class="odd" style="background: transparent !important;"></td>
+                                  <td class="odd" >{{item.LMY_VARIANCE}}</td>
+                                  <td class="odd" style="background: transparent !important;"></td>
+                                  <td class="odd" >{{item.LY_YTD}}</td>
+                                  <td class="odd" style="background: transparent !important;"></td>
+                                  <td class="odd" >{{item.LY_VARIANCE}}</td>                     
+                                </tr>
+
+                                 <tr *ngFor="let item of Used_Units">
+                                  <td>Used Units</td>
+                                  <td class="even" style="background: transparent !important;"></td>
+                                  <td class="even">{{item.MTD}}</td>
+                                  <td class="even" style="background: transparent !important;"></td>
+                                  <td class="even">{{item.BUDGET}}</td>
+                                  <td class="even" style="background: transparent !important;"></td>
+                                  <td class="even">{{item.VARIANCE }}</td>
+                                  <td class="even" style="background: transparent !important;"></td>
+                                  <td class="even">{{item.YTD }}</td>
+                                  <td class="even" style="background: transparent !important;"></td>
+                                  <td class="even" >{{item.CY_BUDGET}}</td>
+                                  <td class="even" style="background: transparent !important;"></td>
+                                  <td class="even">{{item.CY_VARIANCE}}</td>
+                                  <td class="even" style="background: transparent !important;"></td>
+                                  <td class="even">{{item.LM_MTD}}</td>
+                                  <td class="even" style="background: transparent !important;"></td>
+                                  <td class="even">{{item.LM_VARIANCE }}</td>
+                                  <td class="even" style="background: transparent !important;"></td>
+                                  <td class="even" >{{item.LMY_MTD}}</td>
+                                  <td class="even" style="background: transparent !important;"></td>
+                                  <td class="even" >{{item.LMY_VARIANCE}}</td>
+                                  <td class="even" style="background: transparent !important;"></td>
+                                  <td class="even" >{{item.LY_YTD}}</td>
+                                  <td class="even" style="background: transparent !important;"></td>
+                                  <td class="even" >{{item.LY_VARIANCE}}</td>                     
+                                </tr>
+
+                                <tr *ngFor="let item of Unit_Retail_Sales">
+                                    <td style="font-weight: bold;">Unit Retail Sales</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.BUDGET}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.VARIANCE }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.YTD }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.CY_BUDGET}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.CY_VARIANCE}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_VARIANCE }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_VARIANCE}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_YTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_VARIANCE}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Front_Gross">
+                                    <td>Front Gross</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <!-- <td class="even">${{item.MTD}}</td> -->
+                                    <td class="even"> {{item.MTD| currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_VARIANCE}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Back_Gross">
+                                    <td>Back Gross</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0' }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Pure_Gross">
+                                    <td style="font-weight: bold;">Pure Gross</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0' }}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Wholesales">
+                                    <td>Wholesales</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Chargebacks">
+                                    <td>Chargebacks</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Variable_Gross">
+                                    <td style="font-weight: bold;">Variable Gross</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0' }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+                                  <tr>
+                                    <td class="even" style="text-transform: uppercase; color: #f89d1c;  font-family: 'Gotham\ Bold';;">Fixed Operations</td>
+                                    <td class="even" style="background: transparent !important;"></td>   
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                  </tr>
+
+                                  <tr *ngFor="let item of Service_Gross">
+                                    <td>Service Gross</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Parts_Gross">
+                                    <td>Parts Gross</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+                                  
+
+                                  <tr *ngFor="let item of Total_Fixed">
+                                    <td>Total Fixed</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Total_Store_Gross">
+                                    <td>Total Store Gross</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+                                  <tr>
+                                    <td class="even" style="text-transform: uppercase; color: #f89d1c;  font-family: 'Gotham\ Bold';;">Variable Operations</td>
+                                    <td class="even" style="background: transparent !important;"></td>   
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even"></td>
+                                  </tr>
+                                  <tr *ngFor="let item of Variable_Expenses">
+                                    <td>Variable Expenses</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Personnel_Expenses">
+                                    <td>Personnel Expenses</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Semi_Fixed_Expenses">
+                                    <td>Semi-Fixed Expenses</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+
+                                  <tr *ngFor="let item of Fixed_Expenses">
+                                    <td>Fixed Expenses</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Total_Expenses">
+                                    <td style="font-weight: bold;">Total Expenses</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Operating_Profit">
+                                    <td style="font-weight: bold;">Operating Profit</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.CY_BUDGET | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.CY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_MTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_YTD | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_VARIANCE | currency : 'USD' : 'symbol' : '1.0-0'}}</td>                     
+                                  </tr>
+
+                                  
+                                  <tr *ngFor="let item of Adjustments_Income">
+                                    <td style="font-weight: bold;">Adjustments to Income</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.BUDGET}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.VARIANCE }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.YTD }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.CY_BUDGET}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.CY_VARIANCE}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_VARIANCE }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_VARIANCE}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_YTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_VARIANCE}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Manufacturer_Margin">
+                                    <td>Manufacturer Margin</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.MTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.BUDGET}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.VARIANCE }}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.YTD }}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.CY_BUDGET}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.CY_VARIANCE}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_MTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_VARIANCE }}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_MTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_VARIANCE}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_YTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_VARIANCE}}</td>                     
+                                  </tr>
+
+
+                                  <tr *ngFor="let item of Incentives">
+                                    <td>Incentives</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.BUDGET}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.VARIANCE }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.YTD }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.CY_BUDGET}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.CY_VARIANCE}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_VARIANCE }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_VARIANCE}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_YTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_VARIANCE}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Pack">
+                                    <td>Pack</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.MTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.BUDGET}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.VARIANCE }}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.YTD }}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.CY_BUDGET}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.CY_VARIANCE}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_MTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_VARIANCE }}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_MTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_VARIANCE}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_YTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_VARIANCE}}</td>                     
+                                  </tr>
+
+
+                                  <tr *ngFor="let item of Doc_Fees">
+                                    <td>Doc Fees</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.BUDGET}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.VARIANCE }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.YTD }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.CY_BUDGET}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.CY_VARIANCE}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_VARIANCE }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_VARIANCE}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_YTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_VARIANCE}}</td>                     
+                                  </tr>
+
+
+                                  <tr *ngFor="let item of Other_Adjustments">
+                                    <td>Other Adjustments</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.MTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.BUDGET}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.VARIANCE }}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.YTD }}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.CY_BUDGET}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.CY_VARIANCE}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_MTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_VARIANCE }}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_MTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_VARIANCE}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_YTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_VARIANCE}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Net_Additions_Deductions">
+                                    <td style="font-weight: bold;">Net Additions & Deductions</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.BUDGET}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.VARIANCE }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.YTD }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.CY_BUDGET}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.CY_VARIANCE}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd">{{item.LM_VARIANCE }}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_MTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LMY_VARIANCE}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_YTD}}</td>
+                                    <td class="odd" style="background: transparent !important;"></td>
+                                    <td class="odd" >{{item.LY_VARIANCE}}</td>                     
+                                  </tr>
+
+                                  <tr *ngFor="let item of Net_Profit">
+                                    <td style="font-weight: bold;">Net Profit</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.MTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.BUDGET}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.VARIANCE }}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.YTD }}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.CY_BUDGET}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.CY_VARIANCE}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_MTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even">{{item.LM_VARIANCE }}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_MTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LMY_VARIANCE}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_YTD}}</td>
+                                    <td class="even" style="background: transparent !important;"></td>
+                                    <td class="even" >{{item.LY_VARIANCE}}</td>                     
+                                  </tr>
+                              </ng-container>
+                              <ng-template #norecSalesdata>
+                                <tr  >
+                                  <td colspan="27" style="text-align: center;font-size: 14px;background: transparent !important;color: black;"><label>No Data Found</label></td>
+                                </tr>
+                              </ng-template>
+                              </tbody>
+                          </table>
+                        </div> 
+                      </div>
+                    </div>
+                  </div>
+             </div>
+        </div>
+    </div>
+</div>

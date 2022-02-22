@@ -1,0 +1,88 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+    
+    <div class="row">
+       
+          <ng4-loading-spinner  ></ng4-loading-spinner>
+          <main class="col-md-9 ms-auto col-lg-10">
+              <div class="row flex-wrap flex-md-nowrap align-items-center border-bottom">
+                  <div  class="top_bg d-flex align-items-center ">
+                            <div class="form-group col-xs-3 ">
+                            <label class="form-control input-group-lg reg_name">Permissions</label>
+                            </div>
+                  </div>
+              </div>
+          
+              <div class="row justify-content-center py-4 pl-lg-3 pr-lg-4">
+				<div class="col-12 col-lg-12">
+					<div class="incent_bg">
+						<table>
+							<tbody>
+								<tr>
+									<td>
+										<div class="row">
+											<div class="col-12">
+												<div class="col-12">
+													<div class="row">
+														<div class="col-11">
+															<div class="ml-3">													
+															
+																<div class="form-group row incent">
+																	<label class="col-lg-2 align-self-center">Select a Role:</label>
+																	<div class="col-lg-10">
+																		<select >
+																		<option checked value='0'>-- SELECT ROLE --</option>
+																		<option  *ngFor="let item of Roles" [value]="item.R_ID">
+																			{{item.R_NAME}}
+																		</option>
+																	</select>
+																	</div>
+																	</div>																	
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+				
+									</td>
+								</tr>
+				
+								<tr>
+                                    <div class="container">
+                                       
+                                        <div class="row">
+                                          
+                                            <!-- <div class="form-group col">
+                                                <label  class="Mod_Headings" for="StoreIds">Stores:</label>
+                                                <div id="stores" class="row">
+                                                    <div *ngFor="let i of Dealer_DD" style="font-size: 17px;padding-left: 5em;"   class="form-check form-switch col ">
+                                                        <input  [checked]="IsStoreChecked(i.cora_acct_id) == 1?true:false" (change)="HandleStoreIds(i.cora_acct_id)"  
+                                                         id="StoreIds"  formControlName="StoreIds"  [value]="i.cora_acct_id"
+                                                         class="form-check-input" type="checkbox" >
+                                                        <label style="width: 400px;"  class="form-check-label" for="StoreIds">{{i.dealershipname}}</label>
+                                                      </div>
+                                                      
+                                                  </div>
+                                                </div>  -->
+                                         
+                                          <div class="col">
+                                            2 of 3
+                                          </div>
+                                          <div class="col">
+                                            3 of 3
+                                          </div>
+                                        </div>
+                                      </div>
+                                </tr>
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div> 
+          </main>
+    </div>
+    
+</div>

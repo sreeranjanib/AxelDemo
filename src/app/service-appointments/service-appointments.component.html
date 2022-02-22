@@ -1,0 +1,223 @@
+<app-header></app-header>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="modal fade" id="AppointmentDetailed" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div  class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{StoreName}}</h5>
+              
+              <div  >
+                <button (click)="exportAsXLSX()" class="col-md-4 text-right" class="btn btn-primary" id="exporttable" style="width: 143px;margin-left: 15px;background: #4a42d4;border-color:4a42d4 ; font-weight: bold;">Export to Excel</button></div>
+                <button type="button" class="btn-close " data-dismiss="modal" aria-label="Close"></button>
+              
+            </div>
+            <div class="modal-body table table-striped force-overflow" id="style-14" style="max-height: calc(100vh - 90px);overflow: auto;white-space: nowrap;">
+              
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead  style="background-color: #4a42d4;color: white; ">
+                        <th scope="col">Appointment Date</th>
+                        <th scope="col">Appointment Time</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Complaint Summary</th>
+                      <!-- <th  *ngFor = 'let key of DetailedAppointmentkeys' >{{key}}</th> -->
+                </thead>
+                <tbody>
+                  <ng-container *ngIf="DetailedAppointmentData.length > 0; else norecdata">
+                    <tr *ngFor="let item of DetailedAppointmentData ">
+                      <td >{{item.appointmentdate | date: 'shortDate'}}</td>
+                      <td >{{item.appointmenttime }}</td>
+                      <td >{{item.apptcustname}}</td>
+                      <td >{{item.cellular}}</td>
+                      <td >{{item.complaintsummary}}</td>
+                     <!-- <td  *ngFor = 'let key of DetailedAppointmentkeys'> {{item[key]}}</td> -->
+                    </tr>
+                    </ng-container>
+    
+                    <ng-template #norecdata>
+                        <tr >
+                          <td colspan="10" style="text-align: center;color:#6c757d"><label>No Data Found!!</label></td>
+                        </tr>
+                      </ng-template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="Filters" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div id="style-14"  class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            
+            <div  class="modal-header">
+              <button disabled class="text-right" class="btn btn-primary" style="width: 143px;margin-right: 10px;background: #4a42d4;border-color:4a42d4 ; font-weight: bold;">Apply</button>
+              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body table table-striped force-overflow"  style="max-height: calc(100vh - 90px);;white-space: nowrap;">
+              <div class="container">
+                <div class="row">
+                 
+                  <div class="col">
+                    <div class="row">
+                    
+                      <div class="col-12">
+                        <div class="row">
+                          
+                          <div >
+                            <div class="form-group">
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Corporate" checked>
+                                <h5 class="form-check-label" for="exampleRadios1">
+                                  Corporate
+                                </h5>
+                              </div>
+                             
+                              <ngx-treeview [config]="config"  [items]="StoresItems" (filterChange)="onFilterChange($event)" (selectedChange)="values = $event">
+                              </ngx-treeview>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-sm-12">
+                           
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="row">
+                    
+                      <div class="col-12">
+                        <div class="row">
+                          
+                          <div >
+                            <div class="form-group">
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Groups" checked>
+                                  <h5 class="form-check-label" for="exampleRadios1">
+                                    Groups
+                                  </h5>
+                                </div>
+                              <ngx-treeview [config]="config" [items]="GroupItems" (filterChange)="onFilterChange($event)" (selectedChange)="values = $event">
+                              </ngx-treeview>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-sm-12">
+                           
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col">
+                    <div class="row">
+                    
+                      <div class="col-12">
+                        <div class="row">
+                          
+                          <div >
+                            <div class="form-group">
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Brands" checked>
+                                <h5 class="form-check-label" for="exampleRadios1">
+                                  Brands
+                                </h5>
+                              </div>
+                              
+                              <ngx-treeview [config]="config" [items]="BrandItems" (filterChange)="onFilterChange($event)" (selectedChange)="values = $event">
+                              </ngx-treeview>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-sm-12">
+                           
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                   
+              </div>
+                </div>
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+          <ng4-loading-spinner  ></ng4-loading-spinner>
+          <main class="col-md-9 ms-auto col-lg-10">
+              <div class="row no-gutters flex-wrap flex-md-nowrap align-items-center border-bottom">
+                <div *ngIf="TimeStamp;" class="top_bg d-flex align-items-center ">
+                  <label style="font-size: medium;color: white;float: right;">Last Updated Date: {{TimeStamp}}</label>
+                  
+                  <div class="__prmiarysec">
+                    <button [disabled]="CheckPrevDisablity()" style="background-color: transparent;border: none;"><i title="Previous Week"  (click)="PrevWeek()" class="fa fa-caret-left __fa-lft " aria-hidden="true"></i></button>
+                    <button  (click)="CurrentWeek()" style="margin: 0 1rem;background-color: grey;" type="button" class="btn btn-dark ">Current Week</button>
+                  <button [disabled]="CheckNextDisablity()" style="background-color: transparent;border: none;"><i title="Next Week"  (click)="NextWeek()" class="fa fa-caret-right __fa-rt" aria-hidden="true"></i></button>
+                  </div>
+                </div>
+                
+              </div>
+               
+              <div class="stor_headng">
+                <div class="row">
+                  <div class="column1">
+                    
+                  </div>
+                  <div class="column">
+                    <h2 class="ttl-sales"><span>Maloney Report</span></h2>
+                  </div>
+                </div>
+              </div>
+            
+            
+            <div   class="table-responsive hover_">
+              
+              <table class="table table-striped" style="width: 100%; text-align: center;">
+                <colgroup>
+                <col>
+                <col style="background:#f1f1f1">
+                <col>
+                <col style="background:#f1f1f1">
+                <col>
+                <col style="background:#f1f1f1">
+                <col>
+                <col style="background:#f1f1f1">
+                <col>
+                <col style="background:#f1f1f1">
+                <col>
+                <col style="background:#f1f1f1">
+                <col>
+                <col style="background:#f1f1f1">
+                </colgroup>
+                <thead  *ngIf="DateString;" >
+                    <tr *ngIf="Grid_Header;"  >
+                        <th style="width: 22%; border-top: none;text-align: center;" class="store_name">
+                          <!-- <button (click)="Filters()" data-toggle="modal" data-target="#Filters" style="margin: 0 1rem;color: black; background-color: white;margin-bottom: 10%;width: 70%;" type="button" class="btn btn-dark ">Filters</button> -->
+                        </th> 
+                        <th  *ngFor="let key of keys;"  (click)="sort(key, booleanValue)"  style="width: 11%; border-bottom: 5px solid #65bbfa;cursor: pointer;" ><span class="store_ttl">{{key}}</span> <br> <span class="store_val">{{Grid_Header[key]}}</span>  <span style="width: 50%; background:transparent !important;"></span><i  [ngClass]="{'fas fa-sort text-right': key === 'VARIANCE' }"></i></th>
+                      </tr>
+                </thead>
+                <tbody *ngIf="DateString; "style="cursor: pointer;" > 
+                  <tr   *ngFor="let item of Service_App_Grid "  >
+                    <td class="store_name">{{item.NAME}}</td>
+                    <td   *ngFor=" let key of keys;" [ngStyle]="{'color':key === 'VARIANCE' ? 'red' : 'black', 'background-color':key === DateString ? 'gray' : '' ,  'border':'none' }" data-toggle="modal" data-target="#AppointmentDetailed" (click)="AppointmentDetailed(item.CORA_ACCT_CODE, key, item.NAME )" >{{item[key]}}</td> 
+                    </tr>
+                </tbody>
+              </table>
+
+
+            </div>
+
+          </main>
+
+    </div>
+</div>
+
+

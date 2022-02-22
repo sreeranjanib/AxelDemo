@@ -1,0 +1,467 @@
+<app-header></app-header>
+<ng4-loading-spinner  ></ng4-loading-spinner>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 p-0">
+          <div class = "Nrep2_bg">  
+            <div class="row">
+                <div class="col-lg-2">
+                  <div>
+                  <a (click)="PreviousUrl()" style="cursor: pointer;font-size: medium;" class="link-light">Back</a>
+                </div>
+              </div>
+            </div>
+      
+            <div class="row"  >
+          
+                <div class="col-lg-12 p-0">
+                  <div class="Nrep_Deal">
+                    <div class="nr_curve scroll_deals" > 
+                      <table class="table-fixed">
+                               
+                                <thead>
+                                  <tr >
+                                   
+                                    <th class="_ttl">NAME</th>
+                                    <th style="width: 1%;"></th>
+                                    <th class="_ttl" style="width: 10%;">PHONE&nbsp;#</th>
+                                    <th style="width: 1%;"></th>
+                                    <th class="_ttl" style="width: 3%;">EMAIL</th>
+                                    <th style="width: 1%;"></th>
+                                    <th class="_ttl">VIN</th>
+                                    <th style="width: 1%;"></th>
+                                    <th class="_ttl" style="width: 13%;" >DEALER&nbsp;NAME</th>
+                                    <th style="width: 1%;"></th>
+                                    <th class="_ttl" style="width: 3%;">CONTRACT&nbsp;#</th>
+                                    <th style="width: 1%;"></th>
+                                    <th class="_ttl" style="width: 4%;">CONTRACT&nbsp;TYPE</th>
+                                    <th style="width: 1%;"></th>
+                                    <th class="_ttl" style="width: 3%;">CONTRACT&nbsp;DATE</th>
+                                    <th style="width: 1%;"></th>
+                                    <th class="_ttl"  style="width: 3%;">CANCELLATION&nbsp;DATE</th>
+                                    <th style="width: 1%;"></th>
+                                    <th class="_ttl"  style="width: 1%;cursor: pointer;">VIEW</th>
+                                    <th style="width: 1%;"></th>
+                                 
+                                  </tr>
+                                </thead>
+                                <tbody>
+                           
+                                  <ng-container *ngIf="cancellationData.length > 0 ">
+                                  
+                                  <tr *ngFor="let item of cancellationData; let ioe = index;">
+                                   
+                                    <td [ngClass]="{'odd': ioe%2 == 0, 'even': ioe%2 > 0 }">{{item.CUST_NAME}}</td>
+                                    
+                                    <td style="background: transparent !important;"></td>
+                                    <td [ngClass]="{'odd': ioe%2 == 0, 'even': ioe%2 > 0 }">{{item.CUST_PHONE}}</td>
+                                    <td style="background: transparent !important;"></td>
+                                    <td [ngClass]="{'odd': ioe%2 == 0, 'even': ioe%2 > 0 }">{{item.CUST_EMAILID}}</td>
+                                    <td  style="background: transparent !important;"></td>
+                                    <td [ngClass]="{'odd': ioe%2 == 0, 'even': ioe%2 > 0 }">{{item.CUST_VIN}}</td>
+                                    <td style="background: transparent !important;"></td>
+                                    <td [ngClass]="{'odd': ioe%2 == 0, 'even': ioe%2 > 0 }">{{item.DEALER_NAME}}</td>
+                                    <td style="background: transparent !important;"></td>
+                                    <td [ngClass]="{'odd': ioe%2 == 0, 'even': ioe%2 > 0 }">{{item.CONTRACT_NUM}}</td>
+                                  
+                                    <td  style="background: transparent !important;"></td>
+                                    <td [ngClass]="{'odd': ioe%2 == 0, 'even': ioe%2 > 0 }">{{item.CONTRACT_TYPE}}</td>
+                                    <td style="background: transparent !important;"></td>
+                                    <td [ngClass]="{'odd': ioe%2 == 0, 'even': ioe%2 > 0 }">{{item.CONTRACT_DATE | date:'MM/dd/yyyy'}}</td>
+                                    <td  style="background: transparent !important;"></td>
+                                    <td [ngClass]="{'odd': ioe%2 == 0, 'even': ioe%2 > 0 }">{{item.CANCELLATION_DATE | date:'MM/dd/yyyy'}}</td>
+                                    <td  style="background: transparent !important;"></td>
+                                    <td [ngClass]="{'odd': ioe%2 == 0, 'even': ioe%2 > 0 }" style="opacity: 0.4;" (click)="openform(item)" ><img src="../../assets/images/View.png" data-bs-toggle="modal" data-bs-target="#contModal" width="20px" height="20px">  </td>
+                                                        
+                                   
+                                  </tr>
+                               
+                                </ng-container>
+                             
+                                <ng-container *ngIf="cancellationData.length == 0" >
+                                  <tr  >
+                                    <td  colspan="27" style="text-align: center;color: #040404;font-size: 14px;"><label>No Data Found</label></td>
+                                  </tr>
+                                </ng-container>
+                                </tbody>
+                              
+                      </table>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        
+     
+        
+        
+
+     
+   
+    </div>
+
+  </div>
+</div>
+<div class="modal fade" id="contModal" tabindex="-1" aria-labelledby="contModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+  
+          <b style="font-size: 16px;"> Cancellation Request Form</b>
+  <span class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 18px;cursor: pointer;">X </span>
+          <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x
+          </button> -->
+  
+        </div>
+        <div class="modal-body">
+          <div class="col-lg-12">
+            <div class="row justify-content-center">
+              <div class="cancel_bg">
+              <div class="content_width">
+                <div class="row mt-4">
+                  <div class="col-lg-6">
+                    <div class="req_bg">
+                      <h6>Vehicle details</h6>
+                      <form [formGroup]="VehicleDet">
+                        <div class="row align-items-center mb-2">
+                          <label class=" col-sm-3 pe-0">Customer First Name:</label>
+                          <div class="col-sm-4">
+                            <input type="text" class="form-control" formControlName="firstName" disabled>
+                          </div>
+                              <label class=" col-sm-2 pe-0 text-end">Last Name:</label>
+                          <div class="col-sm-3">
+                            <input type="text" class="form-control" formControlName="lastName" disabled>
+                          </div>
+                        </div>
+                        <div class="row align-items-center mb-2">
+                          <label class=" col-sm-3 pe-0">Phone #:</label>
+                          <div class="col-sm-4">
+                            <input type="text" class="form-control" formControlName="phone" pattern="[0-9+( )-]{14}$"
+                              disabled>
+                          </div>
+                        </div>
+                        <div class="row align-items-center mb-2">
+                          <label class=" col-sm-3 pe-0">Email:</label>
+                          <div class="col-sm-4">
+                            <input type="text" class="form-control" formControlName="emailid"
+                              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$" disabled>
+                          </div>
+                         </div>
+                        <div class="row align-items-center mb-2">
+                          <label class=" col-sm-3 pe-0">Selling Dealership:</label>
+                          <div class="col-sm-9">
+                            <select class="form-select " formControlName="sellingDealership" disabled>
+                                <option value="">&nbsp;&nbsp;SELECT</option>
+                                <option *ngFor="let s of stores" [value]="s.AS_ID">{{s.AS_DEALERNAME}}
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row align-items-center mb-2">
+                          <label class=" col-sm-3 pe-0">Contract #: <span style="float:right"><img
+                                src="../../assets/images/info_icon.png"></span></label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="contract" disabled>
+                          </div>
+                        </div>
+                        <div class="row align-items-center mb-2">
+                          <label class=" col-sm-3 pe-0">VIN:</label>
+                          <div class="col-sm-4">
+                            <input type="text" class="form-control" formControlName="vin" maxlength="17" disabled>
+                          </div>
+                        </div>
+                        <div class="row align-items-center mb-2">
+                          <label class=" col-sm-3">Vehicle Year:</label>
+                          <div class="col-sm-2 sml">
+                            <select class="form-select " formControlName="year"  disabled>
+                                <option disabled value="0">SELECT</option>
+                                <option *ngFor="let vy of vehicleyear" [value]="vy.y_modelyear">{{vy.y_modelyear}}
+            </select>
+                          </div>
+                          <label class=" col-sm-1">Make:</label>
+                          <div class="col-sm-2" >
+                            <select class="form-select " formControlName="make" disabled>
+                                <option disabled value="0">SELECT</option>
+                                <option *ngFor="let vm of vehiclemake" [value]="vm.D_DivisionId">{{vm.D_DivisionName}}
+                            </select>
+                          </div>
+                          <label class=" col-sm-1">Model:</label>
+                          <div class="col-sm-3 sml">
+                            <select class="form-select " formControlName="model" disabled>
+                                <option disabled value="0">SELECT</option>
+                                <option *ngFor="let vmd of vehiclemodel" [value]="vmd.m_modelid">{{vmd.m_modelname}}
+              
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row align-items-center mb-2">
+                          <label class=" col-sm-3 pe-0">Date of Contract:</label>
+                          <div class="col-sm-4">
+                            <input type="date" name="contract" class="form-control" formControlName='dateOfContract'  [(ngModel)]="dtofcntrct"
+                             class=datepicker  disabled>
+                          </div>
+            
+                        </div>
+                        <div class="row align-items-center mb-2">
+            
+                          <label class=" col-sm-3 pe-0">Date of Cancellation:</label>
+                          <div class="col-sm-4 sml">
+                            <input type="date" name="cancellation" class="form-control" formControlName='dateOfCancellation'  [(ngModel)]="dtofcnclton" class="datepicker" disabled>
+                          </div>
+                        </div>
+                        <div class="row align-items-center mb-2">
+                          <label class=" col-sm-3 pe-0">Mileage at time of cancellation:</label>
+                          <div class="col-sm-4">
+                            <input type="text" class="form-control" maxlength="10" formControlName="mileage"
+                               disabled>
+                          </div>
+            
+                        </div>
+                      </form>
+            
+                    </div>
+                    <div class="req_bg">
+                      <div class="row align-items-center">
+            
+                        <div class="col-lg-6">
+                          <h6>Reason for cancellation</h6>
+                        </div>
+                        <div class="col-lg-1" *ngIf="reasonName!=''">
+                          <a href='{{uploadreason}}' target="_blank" class="ms-3"><img src="assets/images/upload_icon.png" 
+                              style="cursor: pointer;"></a>
+                        </div>
+                        <div class="col-lg-5" *ngIf="reasonName!=''">
+                            <a href='{{uploadreason}}' target="_blank" class="ms-3"><span  style="cursor: pointer;">{{reasonName}}</span></a>
+                          </div>
+                       
+                      </div>
+                      <form [formGroup]="ReasonsForCancel">
+                        <div>
+                          <label for="symbols"></label>
+                          <span>Select why you are cancelling the contract and then upload the required document by selecting
+                            ‘Upload document’</span>
+                        </div>
+                        <div>
+                          <input type="checkbox" id="symbols" class="custom-check-box" formControlName="customerRequest" disabled>
+                          <label for="symbols"></label>
+                          <span>Customer request <i>(secure odometer reading required)</i></span>
+                        </div>
+                        <div>
+                          <input type="checkbox" id="symbols1" class="custom-check-box" formControlName="vehicleSold" disabled>
+                          <label for="symbols1"></label>
+                          <span>Vehicle Sold / Traded <i>(trade-in / sale documentation required)</i></span>
+            
+                        </div>
+                        <div>
+                          <input type="checkbox" id="symbols2" class="custom-check-box" formControlName="repossession" disabled>
+                          <label for="symbols2"></label>
+                          <span> Repossession <i> (supporting documentation required)</i></span>
+                        </div>
+                        <div>
+                          <input type="checkbox" id="symbols3" class="custom-check-box" formControlName="satisfiedLien" disabled>
+                          <label for="symbols3"></label>
+                          <span> Satisfied Lien <i> (proof of payoff documentation required)</i></span>
+                        </div>
+                        <div>
+                          <input type="checkbox" id="symbols4" class="custom-check-box" formControlName="totalLossofVehicle" disabled>
+                          <label for="symbols4"></label>
+                          <span> Total Loss of Vehicle <i> (total loss documentation required)</i></span>
+                        </div>
+                        <div class="row">
+                          <div class=" col-sm-6"><input type="checkbox" id="symbols5" class="custom-check-box"
+                             formControlName="other" disabled>
+                            <label for="symbols5"></label>
+                            <span> Other <i> (please specify reason) </i></span>
+                          </div>
+                          <div class=" col-sm-6" > <input
+                              id="otherText" type="text" class="form-control" formControlName="otheretext"
+                              disabled> </div>
+                        </div>
+                      </form>
+            
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="req_bg">
+                      <form [formGroup]="ContractType">
+                        <div class="row align-items-center">
+                          <div class="col-lg-4" style="white-space: nowrap;">
+                            <h6 style="margin-bottom: 0;">Type of contract</h6>
+                          </div>
+                          <div class="col-lg-4" style="width:29%">
+                            <div class="row align-items-center">
+                              <div class="col-sm-12 contract">
+                                <select class="form-select" formControlName="type" disabled>
+                                  <option value="0">select</option>
+                                  <option value="Manufacturer">Manufacturer</option>
+                                  <option value="PWC">Principal Warranty Corp</option>
+            
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-4" *ngIf="ContractName!=''">
+                            <a href="{{uploadcontract}}" target="_blank" class="ms-3 " ><img src="assets/images/upload_icon.png" 
+                                style="cursor: pointer;"> <span  class="upld_cnt">{{ContractName}}</span></a>
+                                <br>
+                          </div>
+                        </div>
+                        <div class="row mt-3">
+                          <div class="col-lg-6">
+                            <input type="checkbox" id="symbols6" class="custom-check-box" formControlName="vehicleServiceContract" disabled>
+                            <label for="symbols6"></label>
+                            <span>Vehicle Service Contract</span>
+                          </div>
+                          <div class="col-lg-6">
+                            <input type="checkbox" id="symbols7" class="custom-check-box" formControlName="gap" disabled>
+                            <label for="symbols7"></label>
+                            <span>GAP</span>
+            
+                          </div>
+                          <div class="col-lg-12 d-flex align-items-center">
+                            <input type="checkbox" id="symbols8" class="custom-check-box" formControlName="ancillary"
+                              disabled>
+                            <label for="symbols8"></label>
+                            <span>Ancillary <i>(specify product type)</i></span>
+                            <div class="col-sm-6 ms-auto" >
+                              <input type="text" class="form-control" formControlName="ancillaryType"  disabled>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="req_bg">
+                      <h6>Cancellation refund details</h6>
+                      <p>Please make refund check payable to: <i>(Payoff documentation required if different from lien holder)</i>
+                      </p>
+                      <form [formGroup]="RefundDet">
+            
+                        <div class="row align-items-center mb-2">
+                          <label class=" col-sm-2 pe-0">Contract Owner:</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" formControlName="contractOwner" disabled>
+                          </div>
+                        </div>
+                        <div class="row align-items-center mb-2">
+                          <label class=" col-sm-2 pe-0">Address:</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" formControlName="address" disabled>
+                          </div>
+                        </div>
+                        <div class="row align-items-center mb-2">
+                          <label class=" col-sm-2 pe-0">City:</label>
+                          <div style="width: 22%;">
+                            <input type="text" class="form-control" formControlName="city" disabled>
+                          </div>
+                          <label class="pe-0" style="width: fit-content;">State:</label>
+                          <div style="width:26%">
+                            <div class="row align-items-center">
+                              <div class="col-sm-12 contract">
+                                <select class="form-select " formControlName="state" disabled>
+                                    <option value="0">select</option>
+
+                                    <option *ngFor="let s of states" [value]="s.ST_CODE">{{s.ST_NAME}}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <label class="pe-0" style="width: fit-content;">Zip:</label>
+                          <div style="width:19%">
+                            <input type="text" class="form-control" formControlName="zip" maxlength="5"
+                              disabled>
+                          </div>
+                        </div>
+                        <p>Request Electronic Delivery (ACH) &nbsp; <input type="checkbox" id="symbols9" formControlName="ach"
+                            class="custom-check-box" disabled ><label
+                            for="symbols9"></label></p>
+                        <div class="row align-items-center mb-2" *ngIf="CollectInfo=='Y'">
+                          <label class=" pe-0" style="width: fit-content;">Bank Name:</label>
+                          <div style="width: 20%;">
+                            <input type="text" class="form-control" formControlName="bankName" disabled>
+                          </div>
+                          <label class="pe-0" style="width: fit-content;padding-left: 2px;">Routing #:</label>
+                          <div style="width:20%">
+                            <input type="text" class="form-control" formControlName="routing" 
+                              minlength="10" maxlength="10" disabled>
+                          
+                          </div>
+                          <label class="pe-0" style="width: fit-content;">Acct. #:</label>
+                          <div style="width:18%">
+                            <input type="text" class="form-control" formControlName="acct" disabled>
+                          </div>
+                        </div>
+                        <div class="row align-items-center mb-2">
+                          <div class="col-10">
+                            <span style="padding-right: 20px;">Do you still have an outstanding loan</span>
+                            <div class="radio-item">
+                              <input type="radio" id="ritema" name="outstandingLoan" value="Y" formControlName="outstandingLoan" disabled>
+                              <label for="ritema">Yes</label>
+                          </div>
+                          
+                          <div class="radio-item">
+                              <input type="radio" id="ritemb" name="outstandingLoan" value="N" formControlName="outstandingLoan" disabled>
+                              <label for="ritemb">No</label>
+                          </div>
+                          </div>
+                      
+                        </div>
+            
+                        <div class="row align-items-center mb-2">
+                          <div>
+                            <input type="checkbox" id="symbols12" class="custom-check-box" formControlName="reqExpedited" disabled>
+                            <label for="symbols12"></label>
+                            <span>Request Expedited Processing <i>(5 - 7 days) </i>$150 processing fee witheld from proceeds</span>
+                          </div>
+                          <div class="col-6">
+                            <input type="checkbox" id="symbols10" class="custom-check-box" formControlName="approveExpedited" disabled>
+                            <label for="symbols10"></label>
+                            <span>I approve the Expedited Processing Fee</span>
+                          </div>
+                          <div class="col-6">
+                            <input type="checkbox" id="symbols11" class="custom-check-box" checked
+                              formControlName="agreeCancellationTerms" disabled>
+                            <label for="symbols11"></label>
+                            <span>I agree to the Terms of Cancellation</span>
+                          </div>
+                        </div>
+                        <div class="row align-items-center mb-2" style="pointer-events: none;">
+                          <label class=" col-sm-6 pe-0" >Customer Signature:  <input type="checkbox"
+                            formControlName="customerSignchk" ></label>
+                        <!-- <div class="col-sm-4"> </div> -->
+                    
+                        </div>
+            
+                        <div class="row align-items-center mb-2">
+                          <div class="col-sm-11">
+                            <span>By selecting the checkbox, I certify that this is my digital signature and I agree to the terms and
+                                conditions of the service cancellation</span>
+                          </div>
+                        </div>
+                       </form>
+                    </div>
+                    <div class="req_bg"  style="pointer-events: none;">
+                     
+                      <form [formGroup]="RefundDet">
+                        <input type="checkbox" id="symbols" formControlName="acknowledge" >
+                        <label for="symbols"></label> &nbsp;
+                        <span style="font-family: Gotham Bold;font-size: 0.9rem;color: black;">By selecting the checkbox, I
+                          acknowledge that:</span>
+                        <ol style="font-family:Gotham Book Regular;color: black;">
+                          <li>This process takes and average of 6 to 8 weeks (or 5 to 7 days if expedited)</li>
+                          <li>The refund is paid to the lien holder if applicable and not to me</li>
+                          <li>I will no longer have this service product after I submit the cancellation</li>
+                        </ol>
+                     
+                      </form>
+                    </div>
+                  </div>
+            
+                </div>            
+               
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
