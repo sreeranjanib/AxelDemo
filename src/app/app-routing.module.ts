@@ -41,8 +41,8 @@ import { NightlySummeryVariablesComponent } from './nightly-summery-variables/ni
 import { KioskReportComponent } from './kiosk-report/kiosk-report.component';
 import {FinancialSummaryReportComponent } from './financial-summary-report/financial-summary-report.component';
 import { ServiceContractFormComponent } from './ADMIN/Service-Contract/service-contract-form/service-contract-form.component';
-
-
+import { CVVehiclesComponent } from './cv-vehicles/cv-vehicles.component';
+import { AccountCoaComponent } from './account-coa/account-coa.component';
 
 
 const routes: Routes = [
@@ -91,6 +91,8 @@ const routes: Routes = [
   { path: 'KioskReport', component:KioskReportComponent },
   { path: 'FinancialSummary', component:FinancialSummaryReportComponent},
   { path: 'ServiceContractForm', component:ServiceContractFormComponent},
+  { path: 'CVVehicles', component:CVVehiclesComponent },
+  { path: 'AccountCoa', component:AccountCoaComponent},
   // { path:"Login", component:LognComponent },
   {
     path: '**',

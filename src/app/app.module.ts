@@ -54,6 +54,8 @@ import { KioskReportComponent } from './kiosk-report/kiosk-report.component';
 import { DatePipe } from '@angular/common';
 import { FinancialSummaryReportComponent } from './financial-summary-report/financial-summary-report.component';
 import { ServiceContractFormComponent } from './ADMIN/Service-Contract/service-contract-form/service-contract-form.component';
+import { CVVehiclesComponent } from './cv-vehicles/cv-vehicles.component';
+import { AccountCoaComponent } from './account-coa/account-coa.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +105,9 @@ import { ServiceContractFormComponent } from './ADMIN/Service-Contract/service-c
     NightlySummeryVariablesComponent,
     KioskReportComponent,
     FinancialSummaryReportComponent,
-    ServiceContractFormComponent
+    ServiceContractFormComponent,
+    CVVehiclesComponent,
+    AccountCoaComponent
   ],
  
   imports: [

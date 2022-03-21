@@ -112,4 +112,8 @@ postmethod(url: string, obj: object): Observable<any> {
 
 }
 
+getgrid(obj){
+  return this.http.post('http://axelapi.azaz.com/api/AXELData/GetVehicleSalesCVCartype',obj)
+}
+
 }

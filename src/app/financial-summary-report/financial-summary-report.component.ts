@@ -38,6 +38,7 @@ export class FinancialSummaryReportComponent implements OnInit {
   Personnel_Expenses : any =[];
   Semi_Fixed_Expenses : any =[];
   Fixed_Expenses : any=[];
+  Other_Expenses : any = [];
   Total_Expenses : any = [];
   Operating_Profit : any=[];
   Adjustments_Income : any=[];
@@ -48,6 +49,10 @@ export class FinancialSummaryReportComponent implements OnInit {
   Other_Adjustments : any=[];
   Net_Additions_Deductions : any=[];
   Net_Profit : any=[];
+  SUMMERY:boolean=true;
+  EBITDA :boolean = false;
+  EXPENSE:boolean = false;
+  VKPI:boolean = false;
 
   ChangeDate =new Date( new Date().setDate(new Date().getDate()-1)).toISOString().split('T')[0];
 
@@ -56,99 +61,25 @@ export class FinancialSummaryReportComponent implements OnInit {
     public globalVarComponent:GlobalVariablesComponent,private authService: ApiService,
     private router: Router)
      {
-      //  if((localStorage.getItem('User_ID') )!= 'null'){
-      //    setTimeout(()=>{
-      //     this.authService.getSideMenu().subscribe(Sidemenu =>{
-      //       this.authService.getFullSideMenu().subscribe(full_sidemenu =>{
-      //         if(Sidemenu.some(x => x.SMOD_FILENAME =='Financialreport') == false){
-      //           this.globalVarComponent.SideMenu = false;
-      //         }
-      //         else if((full_sidemenu.some(x => x.SMOD_FILENAME =='Financialreport') == false)){
-      //           this.router.navigate(['404Error']);
-      //        this.globalVarComponent.SideMenu = true;
-      //         }
-      //       })
-      //     })
-      //    })
-      //  }
-      if( this.globalVarComponent.g_ReportUserId != null && this.globalVarComponent.g_ReportUserId != 0 && this.globalVarComponent.g_ReportUserId != undefined){
-        if(this._Activatedroute.snapshot.paramMap.get('Id')!=null){
-          this.ActualDecodeparam = atob(this._Activatedroute.snapshot.paramMap.get('Id'));
-        var DecodedValues = this.ActualDecodeparam.split('/');
-        this.ReportUserId = DecodedValues[0];
-        this.ReportId = DecodedValues[1];
-        this.ReportDate = DecodedValues[2];
-    
-        if(this.ReportId != null)
-          this.globalVarComponent.ReportId = this.ReportId;
-          else
-          this.globalVarComponent.ReportId =0;
-        var pagename = window.location.hash.replace('#/','');
-        
-        let UserID = localStorage.getItem('User_ID');
-        console.log("UserID_LS", UserID);
-        console.log("ReportUserId", this.ReportUserId);
-        
-        // let UserID = '39';
-       if( this.ReportUserId == UserID){
-        setTimeout(() => {
-          this.authService.getSideMenu().subscribe(sidemenu => {
-           this.authService.getFullSideMenu().subscribe(full_sidemenu => {
-             
-             if(sidemenu.some(x => x.SMOD_FILENAME ==pagename) == false  ) {
-               this.globalVarComponent.SideMenu = false;
-              
-             }
-             else if((full_sidemenu.some(x => x.SMOD_FILENAME ==pagename) == false) ) {
-               this.router.navigate(['404Error']);
-               this.globalVarComponent.SideMenu = true;
-             }
-             
-             else if((sidemenu.some(x => x.SMOD_FILENAME == pagename)== false) && (full_sidemenu.some(x => x.SMOD_FILENAME == pagename) == true)){
-               this.router.navigate(['401Error']);
-               this.globalVarComponent.SideMenu = true;
-             }
-            
-           });
-    
-       });
-       }, 2000);
-       }
-       else if (this.ReportUserId != null ){
-       // this.globalVarComponent.g_SelectedMenuItem=localStorage.getItem('PageName');
-        this.globalVarComponent.ReportId= 0;
-        alert("Credentials didn’t match the report link");
-        // alert("You dont have permission for this url. Please  login with " +  this._Activatedroute.snapshot.paramMap.get('Id'));
-        this.router.navigate([localStorage.getItem('PageName')]);
-       }
-        }
-      }
-      else
-      {
-        if(this._Activatedroute.snapshot.paramMap.get('Id') != null && this._Activatedroute.snapshot.paramMap.get('Id') != '')
-        {
-        localStorage.setItem('ReportUrl', window.location.hash.replace('#/',''));
-          console.log("Sales_ReportUrl",localStorage.getItem('ReportUrl'));
-        }
-      }
-     }
      
- 
+     }
+  
     
 
 
   ngOnInit() {
     if(this.globalVarComponent.ReportId > 0){
       this.TabChange = this.globalVarComponent.ReportId;
-      this.ChangeDate= new Date(new Date().setDate(new Date(this.ReportDate).getDate())).toISOString().split('T')[0];
+     this.ChangeDate= new Date(new Date().setDate(new Date(this.ReportDate).getDate())).toISOString().split('T')[0];
     }
-    else{
+    else
+    { this.TabChange = '1';}
       //  this.getToday();
     this.globalVarComponent.SideMenu = false;
     this.globalVarComponent.isSideMenu_Disabled = "Y";
     this.StoresData();
     this.SalesReport();
-    }
+   
 
   }
 
@@ -172,6 +103,34 @@ export class FinancialSummaryReportComponent implements OnInit {
   updatedate(event) {
     this.ChangeDate = new Date(event).toString();
     this.SalesReport();
+  }
+
+  TabClick(event){
+    this.TabChange = event;
+    if(event == "1"){
+      this.SUMMERY = true;
+      this.EBITDA = false;
+      this.EXPENSE = false;
+      this.VKPI = false;
+    }
+    else if(event == "2"){
+      this.SUMMERY = false;
+      this.EBITDA = true;
+      this.EXPENSE = false;
+      this.VKPI = false;
+    }
+    else if(event == "3"){
+      this.SUMMERY = false;
+      this.EBITDA = false;
+      this.EXPENSE = true;
+      this.VKPI = false;
+    }
+    else if(event == "4"){
+      this.SUMMERY = false;
+      this.EBITDA = false;
+      this.EXPENSE = false;
+      this.VKPI = true;
+    }
   }
 
 
@@ -211,6 +170,7 @@ export class FinancialSummaryReportComponent implements OnInit {
                  this.Personnel_Expenses = sorted["Personnel Expenses"];
                  this.Semi_Fixed_Expenses = sorted["Semi-Fixed Expenses"];
                  this.Fixed_Expenses = sorted["Fixed Expenses"];
+				 this.Other_Expenses = sorted["Other Expenses"];
                  this.Total_Expenses = sorted["Total Expenses"];
                  this.Operating_Profit = sorted["Operating Profit"];
                  this.Adjustments_Income = sorted["Adjustments to Income"];
@@ -218,9 +178,9 @@ export class FinancialSummaryReportComponent implements OnInit {
                  this.Incentives = sorted["Incentives"];
                  this.Pack = sorted["Pack"];
                  this.Doc_Fees = sorted["Doc Fees"];
-                 this.Other_Adjustments = sorted["Doc Fees"];
+                 this.Other_Adjustments = sorted["Other Adjustments"];
                  this.Net_Additions_Deductions = sorted["Net Additions & Deductions"];
-                 this.Net_Profit = sorted["Net Additions & Deductions"];
+                 this.Net_Profit = sorted["Net Profit"];
               
                
             }

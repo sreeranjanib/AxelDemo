@@ -1,0 +1,62 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- <ng4-loading-spinner ></ng4-loading-spinner>  -->
+          <main class="col-md-9 ms-auto col-lg-10">
+               <div class="row flex-wrap flex-md-nowrap align-item-center border-bottom"> 
+                <div class="top_bg d-flex align-item-center"> 
+                
+                    <input type="file" (change)="onFileChange($event)">
+                  
+                </div>
+               </div>  
+               
+               <div class="table-responsive hover_">
+                 <table id='my-table-id' class="table table-striped" style="width: 100%;text-align: center;">
+                    <!-- <thead>
+                      <tr style="text-transform: uppercase;">
+                        <th>COA_ID</th>
+                        <th>AcctKey</th>
+                        <th>Cora_Acc_Code</th>
+                        <th>Account NO</th>
+                        <th>Account Description</th>
+                        <th>Account Type</th>
+                        <th>Account Type Detail</th>
+                        <th>Account Full Detail</th>
+                        <th>Department</th>
+                        <th>Dept Type</th>
+                        <th>Business</th>
+                        <th>Line</th>
+                        <th>SubType</th>
+                        <th>SubType Detail</th>
+                        <th>Line 1</th>
+                        <th>COA Type</th>
+                        <th>COA Status</th>
+                        
+                      </tr> 
+                    </thead> -->
+
+                    <tbody>
+                        <tr *ngFor="let row of data">
+                              <td *ngFor="let val of row">
+                                  {{val}}
+                              </td>
+                          </tr> 
+                      </tbody>
+
+                  </table>
+                 </div>
+          
+           </main> 
+          
+          
+    </div>
+</div>
+
+
+
+ 
+
+
+

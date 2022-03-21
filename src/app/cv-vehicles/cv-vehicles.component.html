@@ -1,0 +1,108 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+    <div class="row">
+         <ng4-loading-spinner></ng4-loading-spinner>
+        <main class="col-md-9 ms-auto col-lg-10">
+            <div class="row flex-wrap flex-md-nowrap align-items-center border-bottom">
+                <div class="top_bg d-flex align-items-center">
+                      <!-- <div class="form-group" style="margin-right: 25px !important;margin-top: 9px;">
+                        <select id="Dealer_DDL" (change)="DealerChange($event)" class="_dropdwn" style="width: auto;">
+                            <option value="0">All Stores</option>
+                            <option *ngFor="let i of Dealer_DD" [value]="i.AS_ID">{{i.DEALER_NAME}}</option>
+                        </select>
+                    </div> -->
+                    <div class="form-group" style="margin-right: 25px !important;margin-top: 9px;">
+                        <button  type="button" class="btn btn-primary">Add</button>
+                    </div>
+                       <div class="form-group" style="margin-right: 25px !important;margin-top: 9px;">
+                        <input type="search" placeholder=" Search VIN" name="searchvin" class="srchgroups"  [(ngModel)]="txtVin" > 
+                    </div>
+                    <div class="form-group" style="margin-right: 10px !important;margin-top: 9px;">
+                        <button (click)="searchdata()"type="submit" class="btn btn-primary" >Go</button>
+                    </div> 
+                    <div style="cursor: pointer;" (click)="exportAsXLSX()" class="col-lg-2  ms-auto" style="margin-top: 18px;">
+                        <div class="d-flex align-items-center export" style="float: right;cursor: pointer;"><div>Export to excel</div>  <span><img src="../../assets/images/export.png" style="margin:-5px 0 0 5px;"></span></div>
+                     </div>
+                </div>
+            </div>
+
+            <div class="table-responsive hover_">
+                <table class="table table-stripped" style="width: 100%;text-align: center;">
+                    <colgroup>
+                        <col>
+                            <col style="background:#f1f1f1">
+                            <col>
+                            <col style="background:#f1f1f1">
+                            <col>
+                            <col style="background:#f1f1f1">
+                            <col>
+                            <col style="background:#f1f1f1">
+                            <col>
+                            <col style="background:#f1f1f1">
+                            <col>
+                            <col style="background:#f1f1f1">
+                            <col>
+                            <col style="background:#f1f1f1">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th style="width: 9.5%; border-bottom: 5px solid #65bbfa;"><span class="store_ttl">STYLE ID</span></th>
+                            <th style="width: .3%; background:transparent !important;"></th>
+                            <th style="width: 9.5%; border-bottom: 5px solid #65bbfa;"><span class="store_ttl">YEAR</span> </th>
+                            <th style="width: .5%; background:transparent !important;"></th>
+                            <th style="width: 9.5%; border-bottom: 5px solid #65bbfa;"><span class="store_ttl">MAKE</span> </th>
+                            <th style="width: .3%; background:transparent !important;"></th>
+                            <th style="width: 9.5%; border-bottom: 5px solid #65bbfa;"><span class="store_ttl">MODELNAME</span></th>
+                            <th style="width: .3%; background:transparent !important;"></th>
+                            <th style="width: 12.5%; border-bottom: 5px solid #65bbfa;"><span class="store_ttl">STATUS</span> </th>
+                            <th style="width: .5%; background:transparent !important;"></th>
+                            <th style="width: 12.5%; border-bottom: 5px solid #65bbfa;"><span class="store_ttl">ACTION</span> </th>
+                            <th style="width: .5%; background:transparent !important;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <ng-container *ngIf="DEALER_Change == 0 ">
+                            <tr>
+                                <td colspan="15" style="text-align: center;color: #040404;font-size: 14px;"><label>Please Select Store</label></td>
+                              </tr>
+                        </ng-container> -->
+                       <ng-container *ngIf="vehicledata.length > 0; else norecdata">
+                           <tr *ngFor="let item of vehicledata">
+                               <td ><a style="cursor: pointer;color: #053885;font-size: 0.8rem;">{{item.STYLEID}}</a>  </td>
+                               <td style="background: transparent !important;"></td>
+                               <td>{{item.YEAR}} </td>
+                               <td style="background: transparent !important;"></td>
+                               <td>{{item.MAKENAME}}  </td>
+                               <td style="background: transparent !important;"></td>
+                               <td> {{item.MODELNAME}} </td>
+                               <td style="background: transparent !important;"></td>
+                               <td >
+                                <select style="width: 100%;">
+                                    <option value="0"> Select</option>
+                                </select>
+                               </td>
+                               <!-- <td *ngIf="item.RECID != recid">{{item.REMARK}}
+                                </td> -->
+                             
+                                   <!-- <td *ngIf="item.RECID == recid"><input class="form-control transparent-input" type='text' id='cartype' [(ngModel)]="item.REMARK" [disabled]="isDisabled" [ngClass]="{'activeEdit': Showbuttons === true}"></td> -->
+                               <td style="background: transparent !important;"></td>
+                               
+                               <td> 
+                                   <img src="assets/images/edit_1.png" id="edit" style="cursor: pointer;" (click)="editCarType(item.RECID)" *ngIf="item.RECID != recid">
+                                   <!-- <button id="savebutton" type="button" class="savebutton" (click)="Update()" *ngIf="item.RECID == recid">Update</button> &nbsp;
+                                   <button id="savebutton" type="button" class="cancelbutton" (click)="cancel()" *ngIf="item.RECID == recid">Cancel</button> -->
+                                </td>
+                           </tr>
+                       </ng-container>
+                       <ng-template #norecdata>
+                        <tr>
+                          <td colspan="15" style="text-align: center;color: #040404;font-size: 14px;"><label>No Data Found !!</label></td>
+                        </tr>
+                      </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>

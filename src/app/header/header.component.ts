@@ -53,8 +53,10 @@ export class HeaderComponent implements OnInit {
     this.authService.getFullSideMenu().subscribe(fullsidemenu => {
     console.log("full_sidemenu", fullsidemenu);    
     });
-  localStorage.setItem('RoleID', '1');
-  localStorage.setItem('User_ID', '1');
+  // localStorage.setItem('RoleID', '1');
+  // localStorage.setItem('User_ID', '1');
+  localStorage.setItem('RoleID', '10');
+   localStorage.setItem('User_ID', '99');
   //localStorage.setItem('LocalUserName', 'prasad.chavali');
   //  alert("Header"); 
     if(localStorage.getItem('RoleID') === null ){

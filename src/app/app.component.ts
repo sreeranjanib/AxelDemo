@@ -2,6 +2,8 @@ import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalVariablesComponent } from './global-variables/global-variables.component';
 import { ApiService } from './_providers/api-service/api.service';
+import * as XLSX from 'xlsx';
+const { read, write, utils } = XLSX;
 
 @Component({
   selector: 'app-root',
